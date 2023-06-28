@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saturn</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Saturn is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/kube.min.css') }}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.min.css') }}" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png') }}" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<nav class="navbar logo-w navbar-left" >
+					<a class="logo" href="index.html">Code Snippet</a>
+				</nav>
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1" >
+				    <span class="logo">Code Snippet</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav navbar-right">
+				    <ul>
+				        <li><a href="{{url_for('index')}}">Home</a></li>
+				        <li class="active"><a href="{{url_for('about')}}">About</a></li>
+				        <!-- <li><a href="{{url_for('grp_info')}}">Create Group</a></li> -->
+						<li><a href="{{url_for('login_option')}}">Login</a></li>
+						<!-- <li><a href="{{url_for('user_login')}}">Admin's Login/Register</a></li> -->
+					</ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro">
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-10">
+			    	<img class="img-intro" src="{{url_for('static', filename='images/avatar.png') }}" alt="">
+			    </div>
+			    <div class="unit-90">
+			    	<p class="p-intro">Hello, I’m a Code Snippet. I store Code of everything for you.</p>
+					<!-- <form action="{{url_for('post_snippet')}}" method="post">
+						<input type="text" placeholder="Heading" name="post_heading" required>
+						<br><br>
+						<input type="text" placeholder="Append your code over here" name="post_snippet" required>
+						<br><br>
+						<input type="submit" value="POST">
+					</form> -->
+			    </div>
+			</div>
+		</div>
+	</div>
+    <div>
+        <h3 style="margin-top: 5rem; margin-left: 8rem;">About Us</h3>
+    </div>
+    <div>
+        <p class="abt">I hope you enjoy the Code-Snippet Website. You may receive multiple codes here, as well as also post your queries, and our experts will remark on the solution. You may establish groups as well as interact with everyone present so that everything works quickly and easily. This is a platform designed to give you with solutions to your difficulties so that you can quickly refer to them and comprehend the concept. The purpose of a chat area is to clear up any confusion during live interaction. This is the fundamental platform we built for the time being. Later on, we can create it more active by providing chat bots and workspaces where you'll collaborate among your colleagues to get oversight when you're lost about any task.</p>
+    </div>
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <!-- <div class="unit-50">
+			    	<button class="btn btn-black"><i class="fa fa-arrow-left"></i> PREVIOUS</button>
+			    </div> -->
+			    <!-- <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:afnizarhilmi@gmail.com"><i class="fa fa-send"></i></a></li>
+						<li><a href="http://twitter.com/flamekaizar"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="http://dribbble.com/flamekaizar"><i class="fa fa-dribbble"></i></a></li>
+						<li><a href="http://behance.com/flamekaizar"><i class="fa fa-behance"></i></a></li>
+					</ul>
+			    </div> -->
+			</div>
+			<p class="text-centered foot-cp">
+	    		<a href="#"></a>
+	    	</p>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<script>
+		$(document).ready(function() {
+		$('#like_form').submit(function(event) {
+			event.preventDefault(); // prevent default form submission
+			var data = $('form:eq(index)').find('input[name="post_id"]').val();
+			// $('#post_id').val(); // get the data from the input field
+			$.ajax({
+			type: 'POST',
+			url: '/like_form',
+			data: {'data': data},
+			success: function(response) {
+				console.log(response);
+			}
+			});
+		});
+		});
+
+	</script>
+	<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/kube.min.js')}}"></script>
+</body>
+</html>

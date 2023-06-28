@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saturn</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Saturn is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/kube.min.css') }}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.min.css') }}" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.png') }}" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<nav class="navbar logo-w navbar-left" >
+					<a class="logo" href="{{url_for('index')}}">Code Snippet</a>
+				</nav>
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1" >
+				    <span class="logo">Code Snippet</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav navbar-right">
+				    <ul>
+				        <li class="active"><a href="{{url_for('index')}}">Home</a></li>
+				        <li><a href="{{url_for('about')}}">About</a></li>
+				        <li><a href="{{url_for('user_grp')}}">Group</a></li>
+						<li><a href="{{url_for('login_option')}}">Login</a></li>
+						<!-- <li><a href="{{url_for('user_login')}}">Admin's Login/Register</a></li> -->
+					</ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro">
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-10">
+			    	<img class="img-intro" src="{{url_for('static', filename='images/avatar.png') }}" alt="">
+			    </div>
+			    <div class="unit-90">
+			    	<p class="p-intro">Hello, I’m a Code Snippet. I store Code of everything for you.</p>
+					<!-- <form action="{{url_for('post_snippet')}}" method="post">
+						<input type="text" placeholder="Heading" name="post_heading" required>
+						<br><br>
+						<input type="text" placeholder="Append your code over here" name="post_snippet" required>
+						<br><br>
+						<input type="submit" value="POST">
+					</form> -->
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-left: 25%; margin-top: 5%">
+		<form action="{{url_for('post_snippet')}}" method="post">
+			<h4>Enter The Code Heading:</h4>
+			<input type="text" placeholder="Heading" name="post_heading" required style="width: 250px; border-color: orange; border-radius: 10px;">
+			<br><br>
+			<h4>Enter The Code:</h4>
+			<textarea placeholder="Append your code over here" name="post_snippet" required style="height: 200px; width: 700px; border-color: orange;border-radius: 10px;"></textarea>
+			<br><br>
+			<input type="submit" value="POST" style="margin-left:2%; border-radius:10px; width:10%; background-color: coral; border:0;">
+		</form>
+	</div>
+	
+	<!-- Content -->
+	<section>
+	<div class="content">
+		<div class="container">
+			<!-- Post -->.
+			{% for i in myresult %}
+				
+			<div class="post" style="border: 1px solid coral; padding: 30px;">
+				<!-- Heading -->
+				<!-- <ul>
+					<li> -->
+						<a href="#" icon="fa fa-volume-up"><h1>&rArr;{{i[0]}}</h1></a>
+					<!-- </li>
+				</ul> -->
+				<!-- <hr> -->
+				<div class="in-content">
+					<p> Code: <br>
+						<pre>{{i[1]}}</pre>
+					</p>
+					Contributed By: <br>
+					{{i[2]}}<br><br>
+					<!-- <a class="read-more" href="#">Read more</a> -->
+				</div>
+				<div class="foot-post">
+					<div class="units-row">
+					    <!-- <div class="unit-100">
+					    	<strong>Tags:</strong>
+					    	<a href="#">Galaxy</a>,
+					    	<a href="#">Human</a>,
+					    	<a href="#">World</a>,
+					    </div> -->
+
+
+					    <div class="unit-100">
+
+		
+					    	<strong>COMMENTS:</strong> <br>
+							{% for z in comment_detail %}
+								{% if z[2] == i[3] %}
+									{{z[0]}}---------------{{z[1]}}
+									<br>	
+								
+								{% endif %}
+							{% endfor %}
+							<!-- <br> -->
+							<form action="{{url_for('comment_post')}}" method="post">
+								<input type="hidden" name="post_id" id="post_id" value="{{i[3]}}"><br>
+								<input type="text" name="post_comment" placeholder="Add your Comments">
+								<br>
+								<input type="submit" value="COMMENT" style="margin-top:1%;border-radius:10px; width:15%; background-color: coral; border:0;">
+							</form>
+							<form action="{{url_for('like_form')}}" method="post">
+								<input type="hidden" name="post_id" id="post_id" value="{{i[3]}}">
+								<!-- <img src="https://static.vecteezy.com/system/resources/previews/000/423/439/original/like-icon-vector-illustration.jpg" alt=""> -->
+								<input type="submit" value="Like:-" style="border-radius:20px; width:7%; background-color: coral; border:1px;">
+								{% for z in like_count %}
+									{% if z[0] == i[3] %}
+										{{z[1]}}
+									{% endif %}
+								{% endfor %}
+							</form>
+					    </div>
+					</div>
+				</div>
+			</div>
+				
+			{% endfor %}
+			<!-- /post -->
+		</div>
+	</div>
+</section>
+
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <!-- <div class="unit-50">
+			    	<button class="btn btn-black"><i class="fa fa-arrow-left"></i> PREVIOUS</button>
+			    </div> -->
+			    <!-- <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:afnizarhilmi@gmail.com"><i class="fa fa-send"></i></a></li>
+						<li><a href="http://twitter.com/flamekaizar"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="http://dribbble.com/flamekaizar"><i class="fa fa-dribbble"></i></a></li>
+						<li><a href="http://behance.com/flamekaizar"><i class="fa fa-behance"></i></a></li>
+					</ul>
+			    </div> -->
+			</div>
+			<p class="text-centered foot-cp">
+	    		<p style="font-size: small; color:grey">We hope you'll enjoy this Code-Snippet Website. Anyone can receive numerous codes in this, and you're able to even post your queries, and our experts will comment on the solution.</p>
+	    	</p>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<script>
+		$(document).ready(function() {
+		$('#like_form').submit(function(event) {
+			event.preventDefault(); // prevent default form submission
+			// var data = [ {% for i in myresult %} $('#'+{{i[3]}}).val(), {% endfor %} ];
+			var post_id = $(this).find('input[name="post_id"]').val();
+
+			console.log(data);
+			// $('form:eq(index)').find('input[name="post_id"]').val();
+			// $('#post_id').val(); // get the data from the input field
+			$.ajax({
+			type: 'POST',
+			url: '/like_form',
+			
+			data: {'data': data},
+			success: function(response) {
+				console.log(response);
+			}
+			});
+		});
+		});
+
+	</script>
+	<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/kube.min.js')}}"></script>
+</body>
+</html>
